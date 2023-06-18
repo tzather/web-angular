@@ -1,0 +1,60 @@
+:host {
+  position: relative;
+}
+
+.items,
+.drops {
+  display: flex;
+  flex-wrap: wrap;
+
+  > * {
+    width: 400px;
+    height: 500px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
+    margin: 0px 20px 20px 0px;
+    box-sizing: border-box;
+  }
+}
+
+.items {
+  > * {
+    background-color: var(--sub-bg-color);
+  }
+
+  ::ng-deep * {
+    display: flex;
+    flex-direction: column;
+
+    > header {
+      flex: 0 1 40px;
+      padding: 8px;
+      background-color: rgba(0, 0, 0, 0.02);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    > main {
+      flex: 1 1 auto;
+      overflow: hidden;
+    }
+
+    > footer {
+      flex: 0 1 40px;
+      overflow: hidden;
+      padding: 6px;
+      background-color: rgba(0, 0, 0, 0.02);
+      border-top: 1px solid rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+  }
+}
+
+.drops {
+  position: absolute;
+  top: 0;
+  > * {
+    border-radius: 10px;
+    background-color: var(--sub-bg-color-invert);
+    opacity: 0.1;
+  }
+}

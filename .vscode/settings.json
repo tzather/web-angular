@@ -1,0 +1,43 @@
+{
+  "files.exclude": {
+    "**/.angular": true,
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/package-lock.json": true
+  },
+  "files.watcherExclude": {
+    "**/.angular": true,
+    "**/.git": true,
+    "**/assets/lib": true,
+    "**/dist": true,
+    "**/node_modules": true,
+    "**/package-lock.json": true,
+    "**/tmp": true
+  },
+  "search.exclude": {
+    "**/.angular": true,
+    "**/.git": true,
+    "**/assets/lib": true,
+    "**/dist": true,
+    "**/node_modules": true,
+    "**/package-lock.json": true,
+    "**/tmp": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.detectIndentation": false,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "files.insertFinalNewline": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.organizeImports": true,
+    "source.sortMembers": true
+  },
+  "prettier.arrowParens": "avoid",
+  "prettier.printWidth": 150,
+  "[ignore]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
+  "[properties]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
+  "[shellscript]": { "editor.defaultFormatter": "foxundermoon.shell-format" }
+}

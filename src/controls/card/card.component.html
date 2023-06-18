@@ -1,0 +1,12 @@
+<div id="{{ cardId() }}" class="card">
+  <div class="card-header">
+    <span>{{ header }}</span>
+    <a class="card-help" (click)="helpClick.emit()">?</a>
+  </div>
+  <div class="card-body">
+    <form>
+      <ng-content></ng-content>
+      <app-button id="submit" [text]="submit" (click)="submitClick.emit()"></app-button>
+    </form>
+  </div>
+</div>

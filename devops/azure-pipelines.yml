@@ -1,0 +1,168 @@
+# Pre-requisite: node.js, dotnetcore
+
+trigger:
+  - release/*
+  # - none
+
+pool: Default
+stages:
+  - stage: build
+    displayName: Build
+    jobs:
+      - job:
+        steps:
+          - bash: npm install --prefer-offline --no-audit --no-fund
+            displayName: "Install Packages"
+          - bash: npm run build
+            displayName: "Build"
+          - publish: dist/app
+            displayName: "Publish build artifact"
+            artifact: app
+          - bash: npx ng test --karma-config karma.cicd.js --code-coverage
+            displayName: "Run Unit Test"
+            continueOnError: true # ignore test failures so that test results can be published, then fail on step PublishTestResults
+          - task: PublishTestResults@2
+            displayName: "Publish Unit Test Results"
+            inputs:
+              testResultsFormat: "JUnit"
+              testResultsFiles: "tmp/junit/TESTS-*.xml"
+              failTaskOnFailedTests: true
+          - task: PublishCodeCoverageResults@1
+            displayName: "Publish Code Coverage Results"
+            inputs:
+              codeCoverageTool: "Cobertura"
+              summaryFileLocation: "$(Build.SourcesDirectory)/tmp/cobertura/cobertura-coverage.xml"
+          - bash: npm audit --audit-level=high --json > tmp/audit.json
+            displayName: "Audit packages"
+            continueOnError: true
+          - task: PublishBuildArtifacts@1
+            displayName: "Publish Audit Results"
+            inputs:
+              PathtoPublish: "tmp/audit.json"
+              ArtifactName: "audit_results"
+
+  - stage: deploy_test
+    dependsOn: Build
+    displayName: Deploy to Test
+    variables:
+      - group: web-angular-test
+    jobs:
+      - deployment: DeployWeb
+        environment: web-angular-test
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - bash: >
+                    jq -n 
+                    --arg identity $(identity) 
+                    --arg dashboard $(dashboard) 
+                    '
+                      .identity=$identity |
+                      .dashboard=$dashboard
+                    ' >dist/app/assets/config.json
+                - task: ArchiveFiles@2
+                  displayName: "Archive files"
+                  inputs:
+                    rootFolderOrFile: "dist/app"
+                    includeRootFolder: false
+                    archiveType: zip
+                    archiveFile: $(Build.ArtifactStagingDirectory)/test.zip
+                    replaceExistingArchive: true
+                - task: PublishBuildArtifacts@1
+                  displayName: "Publish Artifact"
+                  inputs:
+                    PathtoPublish: "$(Build.ArtifactStagingDirectory)/test.zip"
+                    ArtifactName: "test"
+                    publishLocation: "Container"
+                - task: AzureWebApp@1
+                  displayName: "Deploy Web App"
+                  inputs:
+                    azureSubscription: "My Azure Service connection"
+                    appName: tzather-test-web
+                    appType: webAppLinux
+                    package: $(Build.ArtifactStagingDirectory)/test.zip
+
+  - stage: deploy_uat
+    dependsOn: Build
+    displayName: Deploy to Uat
+    variables:
+      - group: web-angular-uat
+    jobs:
+      - deployment: DeployWeb
+        environment: web-angular-uat
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - bash: >
+                    jq -n 
+                    --arg identity $(identity) 
+                    --arg dashboard $(dashboard) 
+                    '
+                      .identity=$identity |
+                      .dashboard=$dashboard
+                    ' >dist/app/assets/config.json
+                - task: ArchiveFiles@2
+                  displayName: "Archive files"
+                  inputs:
+                    rootFolderOrFile: "dist/app"
+                    includeRootFolder: false
+                    archiveType: zip
+                    archiveFile: $(Build.ArtifactStagingDirectory)/uat.zip
+                    replaceExistingArchive: true
+                - task: PublishBuildArtifacts@1
+                  displayName: "Publish Artifact"
+                  inputs:
+                    PathtoPublish: "$(Build.ArtifactStagingDirectory)/uat.zip"
+                    ArtifactName: "uat"
+                    publishLocation: "Container"
+                # - task: AzureWebApp@1
+                #   displayName: "Deploy Web App"
+                #   inputs:
+                #     azureSubscription: "My Azure Service connection"
+                #     appName: tzather-uat-web
+                #     appType: webAppLinux
+                #     package: $(Build.ArtifactStagingDirectory)/uat.zip
+
+  - stage: deploy_prod
+    dependsOn: deploy_uat
+    displayName: Deploy to Prod
+    variables:
+      - group: web-angular-prod
+    jobs:
+      - deployment: DeployWeb
+        environment: web-angular-prod
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - bash: >
+                    jq -n 
+                    --arg identity $(identity) 
+                    --arg dashboard $(dashboard) 
+                    '
+                      .identity=$identity |
+                      .dashboard=$dashboard
+                    ' >dist/app/assets/config.json
+                - task: ArchiveFiles@2
+                  displayName: "Archive files"
+                  inputs:
+                    rootFolderOrFile: "dist/app"
+                    includeRootFolder: false
+                    archiveType: zip
+                    archiveFile: $(Build.ArtifactStagingDirectory)/prod.zip
+                    replaceExistingArchive: true
+                - task: PublishBuildArtifacts@1
+                  displayName: "Publish Artifact"
+                  inputs:
+                    PathtoPublish: "$(Build.ArtifactStagingDirectory)/prod.zip"
+                    ArtifactName: "prod"
+                    publishLocation: "Container"
+                # - task: AzureWebApp@1
+                #   displayName: "Deploy Web App"
+                #   inputs:
+                #     azureSubscription: "My Azure Service connection"
+                #     appName: tzather-prod-web
+                #     appType: webAppLinux
+                #     package: $(Build.ArtifactStagingDirectory)/prod.zip

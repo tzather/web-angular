@@ -1,0 +1,12 @@
+<header>Gauge</header>
+<main>
+  <app-gauge
+    *ngFor="let data of filterData"
+    [title]="data.name"
+    [value]="data.value"
+    [max]="100"
+    [color]="data.color"
+    style="width: 300px; align-self: center"
+  ></app-gauge>
+</main>
+<footer><app-carousel [data]="groupList" (onchange)="groupChange($event)"></app-carousel></footer>

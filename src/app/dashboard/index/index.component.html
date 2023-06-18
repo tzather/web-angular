@@ -1,0 +1,47 @@
+<div class="items">
+  <gauge-dashboard
+    *ngIf="authorizationGuard.displayGauge()"
+    draggable="true"
+    [style.order]="getOrder('gauge-dashboard')"
+    (dragstart)="dragstart($event, 'gauge-dashboard')"
+    (dragend)="dragend()"
+  ></gauge-dashboard>
+  <d3-bar-dashboard
+    *ngIf="authorizationGuard.displayBarChart()"
+    draggable="true"
+    [style.order]="getOrder('d3-bar-dashboard')"
+    (dragstart)="dragstart($event, 'd3-bar-dashboard')"
+    (dragend)="dragend()"
+  ></d3-bar-dashboard>
+  <google-bar-dashboard
+    *ngIf="authorizationGuard.displayBarChart()"
+    draggable="true"
+    [style.order]="getOrder('google-bar-dashboard')"
+    (dragstart)="dragstart($event, 'google-bar-dashboard')"
+    (dragend)="dragend()"
+  ></google-bar-dashboard>
+  <plotly-bar-dashboard
+    *ngIf="authorizationGuard.displayBarChart()"
+    draggable="true"
+    [style.order]="getOrder('plotly-bar-dashboard')"
+    (dragstart)="dragstart($event, 'plotly-bar-dashboard')"
+    (dragend)="dragend()"
+  ></plotly-bar-dashboard>
+  <google-pie-dashboard
+    *ngIf="authorizationGuard.displayPieChart()"
+    draggable="true"
+    [style.order]="getOrder('google-pie-dashboard')"
+    (dragstart)="dragstart($event, 'google-pie-dashboard')"
+    (dragend)="dragend()"
+  ></google-pie-dashboard>
+  <google-line-dashboard
+    *ngIf="authorizationGuard.displayLineChart()"
+    draggable="true"
+    [style.order]="getOrder('google-line-dashboard')"
+    (dragstart)="dragstart($event, 'google-line-dashboard')"
+    (dragend)="dragend()"
+  ></google-line-dashboard>
+</div>
+<div class="drops" [style.z-index]="zindex">
+  <div *ngFor="let i of tileIndexList" (drop)="drop($event, i)" (dragover)="$event.preventDefault()"></div>
+</div>

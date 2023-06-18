@@ -1,0 +1,6 @@
+<div style="align-items: center">{{ title }}</div>
+<svg viewBox="0 0 100 50">
+  <circle cx="50" cy="50" r="45" stroke="rgba(0, 0, 0, 0.1)" stroke-width="5" fill="transparent" />
+  <circle cx="50" cy="50" r="45" [attr.stroke]="color" stroke-width="5" fill="transparent" [attr.stroke-dasharray]="dashArray" />
+  <text x="50" y="45" style="font-size: 12px" text-anchor="middle">{{ value }} of {{ max }}</text>
+</svg>

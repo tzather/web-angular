@@ -1,0 +1,4 @@
+<app-card header="Login" submit="Login" (submitClick)="login()">
+  <app-text [(ngModel)]="model.username" field="username" label="Username"></app-text>
+  <app-text [(ngModel)]="model.password" field="password" type="password" label="Password"></app-text>
+</app-card>

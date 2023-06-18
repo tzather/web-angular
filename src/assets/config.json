@@ -1,0 +1,4 @@
+{
+  "identity": "http://localhost:4250/identity",
+  "dashboard": "http://localhost:4250/dashboard"
+}
