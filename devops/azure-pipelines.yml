@@ -121,7 +121,7 @@ stages:
                 #   displayName: "Deploy Web App"
                 #   inputs:
                 #     azureSubscription: "My Azure Service connection"
-                #     appName: tzather-uat-web
+                #     appName: tzather-uat-webangular
                 #     appType: webAppLinux
                 #     package: $(Build.ArtifactStagingDirectory)/uat.zip
 
@@ -163,6 +163,6 @@ stages:
                 #   displayName: "Deploy Web App"
                 #   inputs:
                 #     azureSubscription: "My Azure Service connection"
-                #     appName: tzather-prod-web
+                #     appName: tzather-prod-webangular
                 #     appType: webAppLinux
                 #     package: $(Build.ArtifactStagingDirectory)/prod.zip
