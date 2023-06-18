@@ -1,7 +1,8 @@
 # Pre-requisite: node.js, dotnetcore
 
 trigger:
-  - release/*
+  - main
+  # - release/*
   # - none
 
 pool: Default
@@ -79,7 +80,7 @@ stages:
                   displayName: "Deploy Web App"
                   inputs:
                     azureSubscription: "My Azure Service connection"
-                    appName: tzather-test-web
+                    appName: tzather-test-webangular
                     appType: webAppLinux
                     package: $(Build.ArtifactStagingDirectory)/test.zip
 
@@ -121,7 +122,7 @@ stages:
                 #   displayName: "Deploy Web App"
                 #   inputs:
                 #     azureSubscription: "My Azure Service connection"
-                #     appName: tzather-uat-web
+                #     appName: tzather-uat-webangular
                 #     appType: webAppLinux
                 #     package: $(Build.ArtifactStagingDirectory)/uat.zip
 
@@ -163,6 +164,6 @@ stages:
                 #   displayName: "Deploy Web App"
                 #   inputs:
                 #     azureSubscription: "My Azure Service connection"
-                #     appName: tzather-prod-web
+                #     appName: tzather-prod-webangular
                 #     appType: webAppLinux
                 #     package: $(Build.ArtifactStagingDirectory)/prod.zip
