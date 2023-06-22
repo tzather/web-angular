@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
-    "start-prod": "clear && ng build && http-server ./dist/app -c-1 -o .",
+    "prod": "clear && ng build && http-server ./dist/app -c-1 -o .",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "clear && rm -rf tmp && ng test --code-coverage",
