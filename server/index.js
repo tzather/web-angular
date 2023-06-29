@@ -41,6 +41,18 @@ function post(req, res) {
   fs.readFile(`server${url.parse(req.url, true).pathname}.post.json`, (err, data) => {
     res.writeHead(200, jsonHeaders);
     if (!err) {
+      // if loggin token is requested, then send the data as base64
+      if (req.url == "/identity/login") {
+        let jwt = JSON.parse(data);
+        data = JSON.stringify({
+          identityToken:
+            Buffer.from(JSON.stringify(jwt.header)).toString("base64") +
+            "." +
+            Buffer.from(JSON.stringify(jwt.payload)).toString("base64") +
+            "." +
+            Buffer.from(JSON.stringify(jwt.signature)).toString("base64"),
+        });
+      }
       res.write(data); // return the json file if found
     }
     return res.end();
