@@ -50,7 +50,7 @@ function post(req, res) {
             "." +
             Buffer.from(JSON.stringify(jwt.payload)).toString("base64") +
             "." +
-            Buffer.from(JSON.stringify(jwt.signature)).toString("base64"),
+            jwt.signature,
         });
       }
       res.write(data); // return the json file if found
