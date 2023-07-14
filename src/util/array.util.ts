@@ -19,4 +19,8 @@ export class ArrayUtil {
   arrayObjectToArrayTable(array: any[]) {
     return array.map(n => Object.values(n));
   }
+
+  static sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 }
