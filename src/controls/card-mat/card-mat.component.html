@@ -1,0 +1,5 @@
+<mat-card id="{{ cardId() }}">
+  <mat-card-title>{{ header }}</mat-card-title>
+  <mat-card-content><ng-content></ng-content> </mat-card-content>
+  <mat-card-actions> <app-button id="submit" [text]="submit" (click)="submitClick.emit()"></app-button> </mat-card-actions>
+</mat-card>

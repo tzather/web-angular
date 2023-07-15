@@ -12,6 +12,9 @@ import { PlotlyChartComponent } from './plotly-chart/plotly-chart.component';
 import { SelectComponent } from "./select/select.component";
 import { TextComponent } from "./text/text.component";
 import { ToastComponent } from "./toast/toast.component";
+// Material
+import { MatCardModule } from '@angular/material/card';
+import { CardMatComponent } from './card-mat/card-mat.component';
 
 @NgModule({
   declarations: [
@@ -25,11 +28,19 @@ import { ToastComponent } from "./toast/toast.component";
     SelectComponent,
     TextComponent,
     ToastComponent,
+    CardMatComponent,
+
   ],
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    // Material
+    MatCardModule
+  ],
   exports: [
     ButtonComponent,
     CardComponent,
+    CardMatComponent,
     CarouselComponent,
     D3ChartComponent,
     GaugeComponent,

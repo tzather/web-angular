@@ -34,6 +34,11 @@ const routes: Routes = [
         data: { role: "report" },
         loadChildren: () => import("./report/report.module").then((m) => m.ReportModule),
       },
+      {
+        path: "ui-styles",
+        data: { role: "ui-styles" },
+        loadChildren: () => import("./ui-styles/ui-styles.module").then((m) => m.UiStylesModule),
+      },
       { path: "**", redirectTo: "dashboard" },
     ],
   },
