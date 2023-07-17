@@ -17,6 +17,7 @@ export class TextComponent extends BaseControlComponent implements ControlValueA
   @Input() field!: string; // the field of the model bound to this control
   @Input() label!: string; // label for the field
   @Input() forTable: boolean = false; // render control to be displayed inside table
+  @Input() type = 'text'; // type of input, defaults to text
 
   // Standard implementation begin
   private _text = "";
