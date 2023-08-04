@@ -33,9 +33,9 @@ stages:
           #   inputs:
           #     codeCoverageTool: "Cobertura"
           #     summaryFileLocation: "$(Build.SourcesDirectory)/tmp/cobertura/cobertura-coverage.xml"
-          # - bash: npm audit --audit-level=high --json > tmp/audit.json
-          #   displayName: "Audit packages"
-          #   continueOnError: true
+          - bash: npm audit --audit-level=high --json > tmp/audit.json
+            displayName: "Audit packages"
+            continueOnError: true
           - task: PublishBuildArtifacts@1
             displayName: "Publish Audit Results"
             inputs:
