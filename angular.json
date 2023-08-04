@@ -23,7 +23,7 @@
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/assets", "src/manifest.webmanifest"],
+            "assets": ["src/assets", "src/manifest.webmanifest", "src/web.config"],
             "styles": ["src/styles.scss"],
             "scripts": [],
             "serviceWorker": true,
