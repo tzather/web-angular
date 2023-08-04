@@ -85,8 +85,8 @@ stages:
                     package: $(Build.ArtifactStagingDirectory)/test.zip
 
   - stage: deploy_uat
-    dependsOn: Build
-    displayName: Deploy to Uat
+    dependsOn: deploy_test
+    displayName: Build Uat Artifacts
     variables:
       - group: web-angular-uat
     jobs:
@@ -127,8 +127,8 @@ stages:
                 #     package: $(Build.ArtifactStagingDirectory)/uat.zip
 
   - stage: deploy_prod
-    dependsOn: deploy_uat
-    displayName: Deploy to Prod
+    dependsOn: deploy_test
+    displayName: Build Prod Artifacts
     variables:
       - group: web-angular-prod
     jobs:
