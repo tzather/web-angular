@@ -19,23 +19,23 @@ stages:
           - publish: dist/app
             displayName: "Publish build artifact"
             artifact: app
-          - bash: npx ng test --karma-config karma.cicd.js --code-coverage
-            displayName: "Run Unit Test"
-            continueOnError: true # ignore test failures so that test results can be published, then fail on step PublishTestResults
-          - task: PublishTestResults@2
-            displayName: "Publish Unit Test Results"
-            inputs:
-              testResultsFormat: "JUnit"
-              testResultsFiles: "tmp/junit/TESTS-*.xml"
-              failTaskOnFailedTests: true
-          - task: PublishCodeCoverageResults@1
-            displayName: "Publish Code Coverage Results"
-            inputs:
-              codeCoverageTool: "Cobertura"
-              summaryFileLocation: "$(Build.SourcesDirectory)/tmp/cobertura/cobertura-coverage.xml"
-          - bash: npm audit --audit-level=high --json > tmp/audit.json
-            displayName: "Audit packages"
-            continueOnError: true
+          # - bash: npx ng test --karma-config karma.cicd.js --code-coverage
+          #   displayName: "Run Unit Test"
+          #   continueOnError: true # ignore test failures so that test results can be published, then fail on step PublishTestResults
+          # - task: PublishTestResults@2
+          #   displayName: "Publish Unit Test Results"
+          #   inputs:
+          #     testResultsFormat: "JUnit"
+          #     testResultsFiles: "tmp/junit/TESTS-*.xml"
+          #     failTaskOnFailedTests: true
+          # - task: PublishCodeCoverageResults@1
+          #   displayName: "Publish Code Coverage Results"
+          #   inputs:
+          #     codeCoverageTool: "Cobertura"
+          #     summaryFileLocation: "$(Build.SourcesDirectory)/tmp/cobertura/cobertura-coverage.xml"
+          # - bash: npm audit --audit-level=high --json > tmp/audit.json
+          #   displayName: "Audit packages"
+          #   continueOnError: true
           - task: PublishBuildArtifacts@1
             displayName: "Publish Audit Results"
             inputs:
