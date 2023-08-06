@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ControlsModule } from '../controls.module';
 import { TextMatComponent } from './text-mat.component';
 
 describe('TextMatComponent', () => {
@@ -8,14 +10,15 @@ describe('TextMatComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TextMatComponent]
+      declarations: [TextMatComponent],
+      imports: [ControlsModule, NoopAnimationsModule]
     });
     fixture = TestBed.createComponent(TextMatComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

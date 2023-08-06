@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ControlsModule } from 'src/controls/controls.module';
 import { MaterialComponent } from './material.component';
 
 describe('MaterialComponent', () => {
@@ -8,14 +10,15 @@ describe('MaterialComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MaterialComponent]
+      declarations: [MaterialComponent],
+      imports: [ControlsModule, NoopAnimationsModule]
     });
     fixture = TestBed.createComponent(MaterialComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

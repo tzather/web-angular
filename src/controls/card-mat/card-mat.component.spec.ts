@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { ControlsModule } from '../controls.module';
 import { CardMatComponent } from './card-mat.component';
 
 describe('CardMatComponent', () => {
@@ -8,14 +9,15 @@ describe('CardMatComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CardMatComponent]
+      declarations: [CardMatComponent],
+      imports: [ControlsModule]
     });
     fixture = TestBed.createComponent(CardMatComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

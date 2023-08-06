@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { ControlsModule } from 'src/controls/controls.module';
 import { VanillaComponent } from './vanilla.component';
 
 describe('VanillaComponent', () => {
@@ -8,14 +9,15 @@ describe('VanillaComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [VanillaComponent]
+      declarations: [VanillaComponent],
+      imports: [ControlsModule]
     });
     fixture = TestBed.createComponent(VanillaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
